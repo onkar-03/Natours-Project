@@ -1,0 +1,139 @@
+.popup {
+  // Created the background
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba($color-black, 0.8);
+  z-index: 9999;
+  transform: all 0.3s;
+
+  // Hiding the popup initially
+  // Not using the display:none; as in this we can't style the elements
+  opacity: 0;
+  visibility: hidden;
+
+  // Blur the background
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  // Adding conditions blur background saying if background filter is applied we want the background blur to be .3 in such case
+  @supports (backdrop-filter: blur(10px)) or
+    (-webkit-backdrop-filter: blur(10px)) {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    background-color: rgba($color-black, 0.3);
+  }
+
+  // Content area creation
+  &__content {
+    @include absCenter;
+    width: 75%;
+    height: 50rem;
+    background-color: $color-white;
+    box-shadow: 0 2rem 4rem rgba($color-black, 0.8);
+    border-radius: 3px;
+
+    // Making both the boxes of same height
+    // Hence creating the content block as table cell
+    // For table cell child parent needs to be table
+    display: table;
+
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.25);
+
+    transition: all 0.4s;
+  }
+
+  // Image Block
+  &__left {
+    width: 33.33333%;
+    // float: left;
+    display: table-cell;
+
+    // Vertically align
+    vertical-align: middle;
+
+    // Restrict the overflow of image form the block
+    overflow: hidden;
+  }
+
+  // Content Block
+  &__right {
+    width: 66.66667%;
+    // float: right;
+    display: table-cell;
+
+    // Vertically align
+    vertical-align: middle;
+
+    padding: 3rem 5rem;
+  }
+
+  &__img {
+    display: block;
+    width: 100%;
+  }
+
+  &__text {
+    display: inline-block;
+    font-size: 1.4rem;
+    margin-bottom: 4rem;
+
+    // Display the text content in 2 columns
+    column-count: 2;
+    column-gap: 4rem;
+
+    // 1em = 14px here, as em take the font-size of the current element
+
+    // Add column line
+    column-rule: 1px solid $color-grey-light-2;
+
+    // Add hyphen for incomplete words in a particular line
+    hyphens: auto;
+
+    //For browsers that dont support this
+    -webkit-hyphens: auto;
+  }
+
+  // Making the popup card visible when the book now is pressed
+  // :target refers to opening the link given in the href in anchor
+  // So when the anchor is clicked the popup card is displayed
+  &:target {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  // Enlarging the Popup card ion clock the book now
+  &:target &__content {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  &__close {
+    &:link,
+    &:visited {
+      color: $color-grey-dark;
+      position: absolute;
+      top: 2.5rem;
+      right: 3.5rem;
+
+      //As the Icon is treated as text
+      font-size: 3rem;
+
+      display: inline-block;
+
+      //Remove the Underline of the Icon
+      text-decoration: none;
+
+      transition: all 0.2s;
+
+      line-height: 1;
+    }
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+}

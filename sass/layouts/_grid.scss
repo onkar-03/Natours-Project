@@ -1,0 +1,79 @@
+.row {
+  max-width: $grid-width;
+
+  // Trick to Center Block level Elements
+  margin: 0 auto;
+
+  // Using powerful :not Pseudo class
+  // Adding margin-bottom to all rows except the last one
+  &:not(:last-child) {
+    margin-bottom: $gutter-vertical;
+
+    @include respond(tab-port) {
+      margin-bottom: $gutter-vertical-small;
+    }
+  }
+
+  // Setting amx width for different dives case
+  @include respond(tab-port) {
+    max-width: 50rem;
+    padding: 0 3rem;
+  }
+
+  // Including Clearfix Mixin
+  @include clearfix;
+
+  // Attribute selector
+  // ^= : Selecting all classes starting with 'col-'
+  // *= : Selecting all classes containing 'col-'
+  // $= : Selecting all classes ending with 'col-'
+
+  [class^='col-'] {
+    float: left;
+    &:not(:last-child) {
+      margin-right: $gutter-horizontal;
+
+      @include respond(tab-port) {
+        margin-right: 0;
+        margin-bottom: $gutter-vertical-small;
+      }
+    }
+
+    // Making all the columns take 100% width means each behaving as a row
+    @include respond(tab-port) {
+      width: 100% !important;
+    }
+  }
+
+  // To read values in calc() for sass variables we use the #{$variable}
+  // calc() is a function used to calculate
+  .col-1-of-2 {
+    width: calc((100% - #{$gutter-horizontal}) / 2);
+  }
+
+  .col-1-of-3 {
+    width: calc((100% - 2 * #{$gutter-horizontal}) / 3);
+  }
+
+  .col-2-of-3 {
+    width: calc(
+      2 * ((100% - 2 * #{$gutter-horizontal}) / 3) + #{$gutter-horizontal}
+    );
+  }
+
+  .col-1-of-4 {
+    width: calc((100% - 3 * #{$gutter-horizontal}) / 4);
+  }
+
+  .col-2-of-4 {
+    width: calc(
+      2 * ((100% - 3 * #{$gutter-horizontal}) / 4) + #{$gutter-horizontal}
+    );
+  }
+
+  .col-3-of-4 {
+    width: calc(
+      3 * ((100% - 3 * #{$gutter-horizontal}) / 4) + 2 * #{$gutter-horizontal}
+    );
+  }
+}

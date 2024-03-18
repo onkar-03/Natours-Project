@@ -1,0 +1,98 @@
+.story {
+  width: 75%;
+  margin: 0 auto;
+  box-shadow: 0 3rem 6rem rgba($color-black, 0.1);
+
+  // Added opacity to the stories so as to provide a glass effect on them
+  background-color: rgba($color-white, 0.4);
+  border-radius: 3px;
+  padding: 6rem;
+  padding-left: 9rem;
+  font-size: $default-font-size;
+  transform: skewX(-12deg);
+
+  @include respond(tab-port) {
+    width: 100%;
+    padding: 4rem;
+    padding-left: 7rem;
+  }
+
+  @include respond(phone) {
+    transform: skewX(0);
+  }
+
+  &__shape {
+    width: 15rem;
+    height: 15rem;
+    float: left;
+    transform: translateX(-3rem) skewX(12deg);
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+
+    @include respond(phone) {
+      transform: translateX(-3rem) skewX(0);
+    }
+  }
+
+  &__img {
+    height: 100%;
+    transform: translateX(-4rem) scale(1.4);
+    backface-visibility: hidden;
+    transition: all 0.5s;
+
+    //parent of figcaption relative
+    position: relative;
+
+    //Adjust image position
+    transform: translate(-4rem) scale(1.4);
+
+    //Animation on hovering over story
+    transition: all 0.3s;
+  }
+
+  &__text {
+    transform: skewX(12deg);
+
+    @include respond(phone) {
+      transform: skewX(0);
+    }
+  }
+
+  &__caption {
+    // Center the name on the image
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 20%);
+    color: $color-white;
+    font-size: 1.7rem;
+    text-transform: uppercase;
+
+    //centering text inside the box
+    text-align: center;
+
+    //Hiding caption initially
+    opacity: 0;
+
+    //Animation
+    transition: all 0.3s;
+
+    //Removing jittery animation
+    backface-visibility: hidden;
+  }
+
+  &:hover &__caption {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+
+  //Zoom out image as we hover over the image
+  &:hover &__img {
+    transform: translate(-4rem) scale(1);
+
+    // Blur the image when hovered
+    // Also darken the image when blurred
+    filter: blur(3px) brightness(80%);
+  }
+}

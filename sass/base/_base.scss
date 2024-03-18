@@ -1,0 +1,51 @@
+// Light green: #7ed56f
+// Medium green: #55c57a
+// Dark green: #28b485
+
+// Best Universal Reset
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+// Root Font Size Declaration
+html {
+  // Default font-size: 16px
+  // font-size: 10px;
+  // 10px / 16px = 0.625 = 62.5%;
+  // Percentage of User Browser font-size setting
+  font-size: 62.5%;
+
+  // Media Queries using Sass
+
+  // Width <= 1200
+  @include respond(tab-land) {
+    font-size: 56.25%; // 1rem = 9px -> 9 / 16 = 56.25%
+  }
+
+  // Width <= 900
+  @include respond(tab-port) {
+    font-size: 50%; // 1rem = 8px -> 8 / 16 = 50%
+  }
+
+  // Width >= 1800
+  @include respond(big-desktop) {
+    font-size: 75%; // 1rem = 12px -> 12 / 16 = 75%
+  }
+}
+
+body {
+  // Border Around the Web Page
+  padding: 3rem;
+
+  @include respond(tab-port) {
+    padding: 0;
+  }
+}
+
+// Selecting text styling
+::selection {
+  background-color: $color-primary;
+  color: $color-white;
+}

@@ -1,0 +1,45 @@
+.feature-box {
+  background-color: rgba($color-white, 0.8);
+  font-size: 1.5rem;
+  padding: 2.5rem;
+  border-radius: 3px;
+  text-align: center;
+  box-shadow: 0 1.4rem 4rem rgba($color-black, 0.15);
+
+  //Animations
+  transition: all 0.3s;
+
+  @include respond(tab-port) {
+    padding: 2rem;
+  }
+
+  &__icon {
+    //As Icon Used is Text Format hence font-size to increase the size of the Icon
+    font-size: 6rem !important;
+    margin-bottom: 0.5rem;
+
+    // Giving Text Linear Gradient Style
+    background-image: linear-gradient(
+      to right,
+      $color-primary-light,
+      $color-primary-dark
+    );
+
+    //Giving Background to only Content Length
+    display: inline-block;
+
+    // Clipping the Background to only Icon
+    -webkit-background-clip: text;
+
+    //Color transparent so as to show the background gradient
+    color: transparent;
+
+    @include respond(tab-port) {
+      margin-bottom: 0;
+    }
+  }
+
+  &:hover {
+    transform: translateY(-1.5rem) scale(1.03);
+  }
+}

@@ -1,0 +1,64 @@
+.header {
+  height: 95vh;
+  background-image: linear-gradient(
+      to right bottom,
+      rgba($color-primary-light, 0.8),
+      rgba($color-primary-dark, 0.8)
+    ),
+    url(../img/hero-small.jpg);
+
+  // It automatically scales & crops the image as needed to cover the entire background, without leaving any empty space
+  background-size: cover;
+
+  // This property is used to specify the starting position of a background image within its containing element
+  background-position: top;
+
+  // clip-path It allows you to create complex shapes or paths and then use them to clip or mask the visible content of an element
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+
+  //Incase doesn't work for some browsers
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+
+  // Relative Parent for Logo img
+  position: relative;
+
+  // Applying Image Responsiveness using media queries in CSS
+  // Displaying high resolution image only when we have a resolution above 192dpi & width of screen 600px (37.5em) and above OR min-width of 2000px (125em)
+  // , (comma) means OR
+  @media only screen and (min-resolution: 192dpi) and (min-width: 37.5em),
+    only screen and (min-width: 125em) {
+    background-image: linear-gradient(
+        to right bottom,
+        rgba($color-primary-light, 0.8),
+        rgba($color-primary-dark, 0.8)
+      ),
+      url(../img/hero.jpg);
+  }
+
+  @include respond(phone) {
+    clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+  }
+  // Nesting
+  // & In short copies the parent class at its place
+  &__logo-box {
+    position: absolute;
+    top: 4rem;
+    left: 4rem;
+  }
+
+  &__logo {
+    height: 3.5rem;
+  }
+
+  &__text-box {
+    // Center Heading Content at the Center of the Page
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    // Align anchor elements {['Button'] which are inline} at the center of the TextBox Section
+    text-align: center;
+  }
+}

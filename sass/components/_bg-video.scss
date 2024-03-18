@@ -1,0 +1,27 @@
+.bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  // Height and Width same as that of the parent
+  height: 100%;
+  width: 100%;
+
+  // Pushing it back of the rest of the elements
+  z-index: -1;
+
+  // Opacity
+  opacity: 0.15;
+
+  // Overflow control
+  overflow: hidden;
+
+  // To make the video content cover only the parent size across the webpage
+  &__content {
+    height: 100%;
+    width: 100%;
+
+    // Similar to background-size:cover; object-fit: cover ; is a CSS property used to control how an <img> or <video> element should behave regarding its dimensions and aspect ratio within its container.
+    object-fit: cover;
+  }
+}

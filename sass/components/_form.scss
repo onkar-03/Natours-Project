@@ -1,0 +1,139 @@
+.form {
+  &__group:not(:last-child) {
+    margin-bottom: 2rem;
+  }
+  &__input {
+    font-size: 1.5rem;
+    padding: 1.5rem 2rem;
+    border-radius: 2px;
+    background-color: rgba($color-white, 0.5);
+    border: none;
+
+    //Font family & color needs to be inherited for input elements
+    font-family: inherit;
+    color: inherit;
+
+    border-bottom: 3px solid transparent;
+
+    width: 90%;
+
+    //Represent the input and label in different lines
+    display: block;
+
+    //Animation
+    transition: all 0.3s;
+
+    @include respond(tab-port) {
+      width: 100%;
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 1rem 2rem rgba($color-black, 0.1);
+      border-bottom: 3px solid $color-primary;
+
+      // Highlighting the valid and invalid states of the form during inputs
+      &:invalid {
+        border-bottom: 3px solid $color-secondary-dark;
+      }
+
+      &:valid {
+        border-bottom: 3px solid $color-primary;
+      }
+    }
+
+    &::-webkit-input-placeholder {
+      color: $color-grey-dark-2;
+    }
+  }
+
+  //Style Focus state
+
+  &__label {
+    //to style using margin padding etc..
+    display: block;
+
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-left: 2rem;
+    margin-top: 0.7rem;
+
+    //Animations
+    transform: all 0.3s;
+  }
+
+  //Styling the labels to be shown only when the input field is active
+  // + sibling selector
+  &__input:placeholder-shown + &__label {
+    //hides from the page but still has the space on the page
+    opacity: 0;
+
+    // Removes the element from the page not occupying any space until shown
+    visibility: hidden;
+  }
+
+  //Hiding the original buttons
+  &__radio-input {
+    display: none;
+  }
+
+  &__radio-group {
+    width: 49%;
+    display: inline-block;
+
+    @include respond(tab-port) {
+      width: 100%;
+      margin-bottom: 2rem;
+    }
+  }
+
+  &__radio-label {
+    font-size: $default-font-size;
+    cursor: pointer;
+
+    //Parent of radio-button
+    position: relative;
+
+    padding-left: 5rem;
+  }
+
+  &__radio-button {
+    height: 3rem;
+    width: 3rem;
+    border: 5px solid $color-primary;
+    border-radius: 50%;
+
+    //As a span element hence making it block
+    display: inline-block;
+
+    //Position over the radio button
+    position: absolute;
+    top: -0.5rem;
+    left: -0.2rem;
+
+    //creating the inner circle
+    &::after {
+      content: '';
+      height: 1.3rem;
+      width: 1.3rem;
+      border-radius: 50%;
+      background-color: $color-primary;
+
+      //position
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      //making invisible if not selected
+      opacity: 0;
+
+      transition: opacity 0.2s;
+    }
+  }
+
+  // We want to make the radio label button created using after to be visible when the original radio button is checked means selected
+  &__radio-input:checked + &__radio-label &__radio-button::after {
+    opacity: 1;
+  }
+}

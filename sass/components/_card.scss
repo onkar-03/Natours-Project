@@ -1,0 +1,296 @@
+.card {
+  // ^ Functionality
+
+  // The perspective property defines how far the object is away from the user. So, a lower value will result in a more intensive 3D effect than a higher value.
+  perspective: 150rem;
+
+  //For mozilla firefox we use this fix
+  -moz-perspective: 150rem;
+
+  //Parent of card front & back set to relative position
+  position: relative;
+
+  // When all children elements are floated then the parent height collapses
+  // Same happens when all the children are absolutely positioned
+  // To fix there is no clearfix hack here
+  // We need to give the same height to the parent as well that the fix
+  height: 52rem;
+
+  &__side {
+    height: 52rem;
+
+    //Animation
+    transition: all 0.8s ease;
+
+    //Absolute positioning of Cards
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    //Card width
+    width: 100%;
+
+    //To hide the backface visibility of back card initially
+    backface-visibility: hidden;
+
+    border-radius: 3px;
+    box-shadow: 0 1.4rem 4rem rgba($color-black, 0.15);
+
+    //Stop Card Image Overflow
+    overflow: hidden;
+
+    &--front {
+      background-color: $color-white;
+    }
+
+    &--back {
+      transform: rotateY(180deg);
+
+      //Background Gradient Card 1
+      &-1 {
+        background-image: linear-gradient(
+          to right bottom,
+          $color-secondary-light,
+          $color-secondary-dark
+        );
+      }
+
+      //Background Gradient Card 2
+      &-2 {
+        background-image: linear-gradient(
+          to right bottom,
+          $color-primary-light,
+          $color-primary-dark
+        );
+      }
+
+      &-3 {
+        background-image: linear-gradient(
+          to right bottom,
+          $color-tertiary-light,
+          $color-tertiary-dark
+        );
+      }
+    }
+  }
+
+  //Rotate front side of the card only when hovered as the backside is already rotated
+  &:hover &__side--front {
+    transform: rotateY(-180deg);
+  }
+
+  //Rotate the back side to normal on hover as already rotated to 180 degrees initially
+  &:hover &__side--back {
+    transform: rotateY(0);
+  }
+
+  // ^ Front Side Styling
+  &__picture {
+    background-size: cover;
+    height: 23rem;
+
+    //To add Light Opacity view to images without using alpha property in linear-gradient()
+    background-blend-mode: screen;
+
+    //Clip images
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+
+    //Incase doesn't work for some browsers
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+
+    //For unsupported browser
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+
+    //On using the clip-path then overflow hidden doesn't work hence defining border top left & right separately
+
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+
+    &--1 {
+      background-image: linear-gradient(
+          to right bottom,
+          $color-secondary-light,
+          $color-secondary-dark
+        ),
+        url(../img/nat-5.jpg);
+
+      //Incase not using background-blend-mode:screen;
+
+      // background-image: linear-gradient(
+      //     to right,
+      //     rgba($color-secondary-light, 0.5),
+      //     rgba($color-secondary-dark, 0.5)
+      //   ),
+      //   url(../../img/nat-5.jpg);
+    }
+
+    &--2 {
+      background-image: linear-gradient(
+          to right bottom,
+          $color-primary-light,
+          $color-primary-dark
+        ),
+        url(../img/nat-6.jpg);
+    }
+
+    &--3 {
+      background-image: linear-gradient(
+          to right bottom,
+          $color-tertiary-light,
+          $color-tertiary-dark
+        ),
+        url(../img/nat-7.jpg);
+    }
+  }
+
+  &__heading {
+    font-size: 2.8rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    color: $color-white;
+
+    // Placing the text on top of Image
+    // Absolute positioning
+    position: absolute;
+    top: 12rem;
+    right: 2rem;
+
+    // Text Align
+    text-align: right;
+
+    //Adjusting width to keep then in 2 lines
+    width: 60%;
+  }
+
+  &__heading-span {
+    padding: 1rem 1.5rem;
+
+    //Doesn't work in Brave and some browsers hence using webkit
+    -webkit-box-decoration-break: clone;
+
+    &--1 {
+      background-image: linear-gradient(
+        to right bottom,
+        rgba($color-secondary-light, 0.85),
+        rgba($color-secondary-dark, 0.85)
+      );
+    }
+
+    &--2 {
+      background-image: linear-gradient(
+        to right bottom,
+        rgba($color-primary-light, 0.85),
+        rgba($color-primary-dark, 0.85)
+      );
+    }
+
+    &--3 {
+      background-image: linear-gradient(
+        to right bottom,
+        rgba($color-tertiary-light, 0.85),
+        rgba($color-tertiary-dark, 0.85)
+      );
+    }
+  }
+
+  &__details {
+    padding: 3rem;
+    ul {
+      list-style: none;
+      width: 80%;
+      margin: 0 auto;
+      li {
+        text-align: center;
+        font-size: 1.5rem;
+        padding: 1rem;
+
+        &:not(:last-child) {
+          border-bottom: 1px solid $color-grey-light-2;
+        }
+      }
+    }
+  }
+
+  // ^ Back Side Styling
+  &__cta {
+    //Center the cta Container using the absolute position trick
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 90%;
+
+    // anchor Element is inline treated as text hence text-align:center works
+    text-align: center;
+  }
+
+  &__price-box {
+    color: $color-white;
+    margin-bottom: 8rem;
+  }
+
+  &__price-only {
+    font-size: 1.4rem;
+    text-transform: uppercase;
+  }
+  &__price-value {
+    font-size: 6rem;
+
+    //Huge Text less weight
+    font-weight: 100;
+  }
+
+  // Modifying the code for devices where the cards are still displayed with front and back sides but the screen doesn't have a hover feature
+  // In such cases user cant hover and turn the card hence in such cases also we want the card to have the merged version of front and back
+  // Hover:none condition checks using css if device screen has a feature to hover if not then the merged card will be displayed
+
+  // @include respond(tab-port) {
+
+  //Can't write multiple conditions media queries using mixin media query hence using the standard way to write query here
+  @media only screen and (max-width: 56.25em), only screen and (hover: none) {
+    height: auto;
+
+    // As we merge the front and back side of the card as together hence applying the border radius background color & shadow to the overall container now
+    border-radius: 3px;
+    background-color: $color-white;
+    box-shadow: 0 1.4rem 4rem rgba($color-black, 0.15);
+
+    &__side {
+      height: auto;
+      position: relative;
+      box-shadow: none;
+
+      &--back {
+        transform: rotateY(0deg);
+        clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
+      }
+    }
+
+    //Don't Rotate front side of the card only when hovered ain lesser resolution screens
+    &:hover &__side--front {
+      transform: rotateY(0deg);
+    }
+
+    &__details {
+      padding: 1rem 3rem;
+    }
+
+    // ^ Back Side Styling
+    &__cta {
+      position: relative;
+      top: 0;
+      left: 0;
+      transform: translate(0);
+      width: 100%;
+      padding: 7rem 4rem 4rem 4rem;
+    }
+
+    &__price-box {
+      margin-bottom: 3rem;
+    }
+    &__price-value {
+      font-size: 4rem;
+    }
+  }
+}

@@ -1,0 +1,70 @@
+@mixin clearfix {
+  &:after {
+    content: '';
+    clear: both;
+    display: table;
+  }
+}
+
+@mixin absCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// Media Query Manager
+/*
+0-600: Phone
+600-900: Tablet Portrait
+900-1100: Tablet Landscape
+1200-1800: Desktop
++1800: Big Desktop
+*/
+
+@mixin respond-phone {
+  @media (max-width: 600px) {
+    @content;
+  }
+}
+
+/* $breakpoint choices : 
+- phone
+- tab-port
+- tab-land
+- big-desktop
+
+1em = 16px we take
+
+Order: Base + Typography > General Layout + Grid > Page Layout > Components
+*/
+
+// Using Good way of breakpoint selection i.e Commonly used devices screen sizes
+
+// We won't use pixels rather we use 'em' here as rem does not work the way we want in media queries in many browsers
+@mixin respond($breakpoint) {
+  @if $breakpoint== phone {
+    @media only screen and (max-width: 37.5em) {
+      // 600px
+      @content;
+    }
+  }
+  @if $breakpoint== tab-port {
+    @media only screen and (max-width: 56.25em) {
+      // 900px
+      @content;
+    }
+  }
+  @if $breakpoint== tab-land {
+    @media only screen and (max-width: 75em) {
+      // 1200px
+      @content;
+    }
+  }
+  @if $breakpoint== big-desktop {
+    // 1800px
+    @media only screen and (min-width: 112.5em) {
+      @content;
+    }
+  }
+}
